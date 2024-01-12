@@ -563,3 +563,6 @@ p {
 hr {
     margin-top: 8px;
 }
+.hidden{
+    display: none;
+}

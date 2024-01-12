@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginDashboardController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\MyAccountController;
 
 
 /*
@@ -18,19 +23,64 @@ use App\Http\Controllers\EmployeeController;
 */
 Route::get('/', [LoginDashboardController::class, 'login']);
 Route::post('login', [LoginDashboardController::class, 'AuthLogin']);
+Route::get('/logout', [LoginDashboardController::class, 'logoutButton'])->name('logoutButton');
+
+
 
 Route::group(['middleware' => 'superadmin'], function () {
     Route::get('/SuperAdmin/Dashboard', [DashboardController::class, 'dashboard']);
+
+
+
     Route::get('/SuperAdmin/Employee', [EmployeeController::class, 'employee']);
+    Route::get('/SuperAdmin/Employee/AddEmployee', [EmployeeController::class, 'addemployee']);
+    Route::post('/SuperAdmin/Employee/AddEmployee', [EmployeeController::class, 'insertemployee']);
+    Route::get('/SuperAdmin/Employee/EditEmployee/{id}', [EmployeeController::class, 'editemployee']);
+    Route::post('/SuperAdmin/Employee/EditEmployee/{id}', [EmployeeController::class, 'updateemployee']);
+    Route::get('/SuperAdmin/Employee/PreviewEmployee/{id}', [EmployeeController::class, 'previewemployee']);
+
+
+    Route::get('/SuperAdmin/Leave', [LeaveController::class, 'leave']);
+
+
+
+    Route::get('/SuperAdmin/Announcement', [AnnouncementController::class, 'announcement']);
+
+
+
+    Route::get('/SuperAdmin/Setting', [SettingController::class, 'setting']);
 });
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/Admin/Dashboard', [DashboardController::class, 'dashboard']);
+
+
+
     Route::get('/Admin/Employee', [EmployeeController::class, 'employee']);
+    Route::get('/Admin/Employee/AddEmployee', [EmployeeController::class, 'addemployee']);
+    Route::post('/Admin/Employee/AddEmployee', [EmployeeController::class, 'insertemployee']);
+    Route::get('/Admin/Employee/EditEmployee/{id}', [EmployeeController::class, 'editemployee']);
+    Route::post('/Admin/Employee/EditEmployee/{id}', [EmployeeController::class, 'updateemployee']);
+    Route::get('/Admin/Employee/PreviewEmployee/{id}', [EmployeeController::class, 'previewemployee']);
+
+
+    Route::get('/Admin/Leave', [LeaveController::class, 'leave']);
+
+
+
+    Route::get('/Admin/Announcement', [AnnouncementController::class, 'announcement']);
+
+
+
+    Route::get('/Admin/Setting', [SettingController::class, 'setting']);
+
 });
 
 Route::group(['middleware' => 'employee'], function () {
     Route::get('/Employee/Dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('/Employee/Leave', [LeaveController::class, 'leave']);
+    Route::get('/Employee/Message', [MessageController::class, 'message']);
+    Route::get('/Employee/MyAccount', [MyAccountController::class, 'myaccount']);
+    Route::get('/Employee/Setting', [SettingController::class, 'setting']);
 });
 
-Route::get('/logout', [LoginDashboardController::class, 'logoutButton'])->name('logoutButton');

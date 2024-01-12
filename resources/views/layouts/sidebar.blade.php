@@ -18,7 +18,7 @@
             @endif
         </div>
         <div class="name">
-            <h3 class="text-dark">Hi, Blaire!</h3>
+            <h3 class="text-dark">{{Auth::user()->name}}</h3>
             @if(Auth::user()->user_type == 0)
             <span class="text-dark">Super Admin Account</span>
             @elseif(Auth::user()->user_type == 1)
@@ -213,7 +213,6 @@
         </li>
         @endif
         @endif
-        
         @if(Auth::user()->user_type == 2)
         @if(Request::segment(2) == 'MyAccount')
         <li class="active">
@@ -224,15 +223,13 @@
         </li>
         @else
         <li>
-            <a href="{{url('Employe/MyAccount')}}">
+            <a href="{{url('Employee/MyAccount')}}">
                 <i class="bx far fa-user" style="color: #000000;"></i>
                 <span class="text">My Account</span>
             </a>
         </li>
         @endif
         @endif
-        
-       
     </ul>
 
     <ul class="side-menu bottom">

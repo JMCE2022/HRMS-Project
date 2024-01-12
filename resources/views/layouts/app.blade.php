@@ -76,5 +76,11 @@
     <script src="{{asset('js/main.js')}}"></script>
     
 </body>
-
+<script>
+        // Clear Search
+        function clearSearch() {
+            document.getElementById('search').value = '';
+            document.querySelector('form').submit();
+        }
+    </script>
 </html>

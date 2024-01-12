@@ -24,6 +24,17 @@ class User extends Authenticatable
         'email',
         'user_type',
         'password',
+        'middlename',
+        'lastname',
+        'suffix',
+        'sex',
+        'age',
+        'age',
+        'birth_date',
+        'phonenumber',
+        'department',
+        'daily_rate',
+        'credit',
     ];
 
     /**
@@ -45,4 +56,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public static function getEmployee()
+{
+    return self::where('user_type', '=', 2);
 }
+static public function getID($id)
+    {
+        return self::find($id);
+    }
+}
+
