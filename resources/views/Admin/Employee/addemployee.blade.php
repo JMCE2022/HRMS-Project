@@ -12,10 +12,7 @@
                     <div class="bg-white text-center p-4">
                         <div class="user-head">
                             <div class="d-flex justify-content-between border-bottom  ">
-                                <a>Personal Details</a>
-                                <a>Educational Attainment</a>
-                                <a>Eligibility/License</a>
-                                <a>Employment Details</a>
+                                <a>Admin Controller</a>
                             </div>
                            
                             <form method="post" action="" >
@@ -51,10 +48,11 @@
                                                 <label for="suffix">Suffix</label>
                                                 <select id="suffix" class="form-control" name="suffix">
                                                     <option selected disabled>--Select Suffix--</option>
-                                                    <option value="0">Jr.</option>
-                                                    <option value="1">Sr.</option>
-                                                    <option value="2">I</option>
-                                                    <option value="3">II</option>
+                                                    <option value="Jr.">Jr.</option>
+                                                    <option value="Sr.">Sr.</option>
+                                                    <option value="I">I</option>
+                                                    <option value="II">II</option>
+                                                    <option value="III">II</option>
                                                 </select>
                                                 @if($errors->has('suffix'))
                                                 <span class="text-danger">{{ $errors->first('suffix') }}</span>
@@ -66,7 +64,7 @@
                                         <div class="fields">
                                             <div class="input-field">
                                                 <label for="sex">Sex</label>
-                                                <select id="sex" class="form-control" name="sex" required>
+                                                <select id="sex" class="form-control" name="sex">
                                                     <option selected disabled>--Select Sex--</option>
                                                     <option value="Male">Male</option>
                                                     <option value="Female">Female</option>
@@ -106,15 +104,49 @@
                                     </div>
                                     <div class="col-sm-12 col-xl-12">
                                         <div class="fields">
+                                        <div class="hidden input-field">
+                                                <label>Role</label>
+                                                <input  class="form-control" name="user_type" value="2" required>
+                                                @if($errors->has('user_type'))
+                                                <span class="text-danger">{{ $errors->first('user_type') }}</span>
+                                                @endif
+                                            </div>
                                             <div class="input-field">
                                                 <label for="suffix">Department</label>
-                                                <select class="form-control" name="department" required>
+                                                <select class="form-control" name="department">
                                                     <option selected disabled>--Select Department--</option>
-                                                    <option value="0">Department 1</option>
-                                                    <option value="1">Department 2</option>
+                                                    <option value="Department 1">Department 1</option>
+                                                    <option value="Department 2">Department 2</option>
+                                                    <option value="Department 3">Department 3</option>
+                                                    <option value="Department 4">Department 4</option>
+                                                    <option value="Department 5">Department 5</option>
+                                                    <option value="Department 6">Department 6</option>
+                                                    <option value="Department 7">Department 7</option>
+                                                    
                                                 </select>
                                                 @if($errors->has('department'))
                                                 <span class="text-danger">{{ $errors->first('department') }}</span>
+                                                @endif
+                                            </div>
+                                            <div class="input-field">
+                                                <label for="suffix">Position</label>
+                                                <select class="form-control" name="position">
+                                                    <option selected disabled>--Select position--</option>
+                                                    <option value="Position 1">Position 1</option>
+                                                    <option value="Position 2">Position 2</option>
+                                                    <option value="Position 3">Position 3</option>
+                                                    <option value="Position 4<">Position 4</option>
+                                                    <option value="Position 5">Position 5</option>
+                                                    <option value="Position 6">Position 6</option>
+                                                    <option value="Position 7">Position 7</option>
+                                                    <option value="Position 8">Position 8</option>
+                                                    <option value="Position 9">Position 9</option>
+                                                    <option value="Position 10">Position 10</option>
+                                                    
+
+                                                </select>
+                                                @if($errors->has('position'))
+                                                <span class="text-danger">{{ $errors->first('position') }}</span>
                                                 @endif
                                             </div>
                                             <div class="input-field">
@@ -125,29 +157,27 @@
                                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                                                 @endif
                                             </div>
-                                            <div class="input-field">
+                                            <div class="hidden input-field">
                                                 <label>Password</label>
-                                                <input type="password" placeholder="Enter Password" class="form-control"
+                                                <input type="password" value="12345" placeholder="Enter Password" class="form-control"
                                                     name="password" value="" required>
                                                 @if($errors->has('password'))
                                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                                                 @endif
                                             </div>
                                             <div class="input-field">
-                                                <label for="suffix">Position</label>
-                                                <select class="form-control" name="user_type" required>
-                                                    <option selected disabled>--Select position--</option>
-                                                    <option value="0">SuperAdmin</option>
-                                                    <option value="1">Admin</option>
-                                                    <option value="2">Employee</option>
-                                                </select>
-                                                @if($errors->has('user_type'))
-                                                <span class="text-danger">{{ $errors->first('user_type') }}</span>
+                                                <label>End of Contract</label>
+                                                <input type="date"  class="form-control"
+                                                    name="end_of_contract"  required>
+                                                @if($errors->has('birth_date'))
+                                                <span class="text-danger">{{ $errors->first('birth_date') }}</span>
                                                 @endif
                                             </div>
+                                            
+                                            
                                             <div class="input-field">
                                                 <label>Daily Rate</label>
-                                                <input type="number" class="form-control" name="daily_rate"
+                                                <input type="numeric" class="form-control" name="daily_rate"
                                                     placeholder="e.g., 560" value="" required>
                                                 @if($errors->has('daily_rate'))
                                                 <span class="text-danger">{{ $errors->first('daily_rate') }}</span>

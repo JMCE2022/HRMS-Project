@@ -26,6 +26,8 @@ class EmployeeController extends Controller
                     ->orWhere('custom_id', 'LIKE', "%$search%")
                     ->orWhere('department', 'LIKE', "%$search%")
                     ->orWhere('email', 'LIKE', "%$search%")
+                    ->orWhere('end_of_contract', 'LIKE', "%$search%")
+                    ->orWhere('position', 'LIKE', "%$search%")
                     ->orWhere('daily_rate', 'LIKE', "%$search%");
             });
         }
@@ -55,7 +57,7 @@ class EmployeeController extends Controller
 
     public function insertemployee(Request $request)
     {
-        try {
+        
             $user = new User;
     
             // Create a new user instance
@@ -133,11 +135,7 @@ class EmployeeController extends Controller
             $user->save();
     
             return redirect()->back()->with('success', 'Employee successfully added');
-        } catch (\Exception $e) {
-            // Log the exception or handle it in a way that makes sense for your application
-            return redirect()->back()->with('error', 'An error occurred while adding the employee');
-           
-        }
+       
     }
 
     public function editemployee($id)
@@ -159,7 +157,7 @@ class EmployeeController extends Controller
 
     public function updateemployee($id, Request $request){
 
-        try {
+       
             $user = User::getId($id);
     
             // Create a new user instance
@@ -189,11 +187,7 @@ class EmployeeController extends Controller
             $user->save();
     
             return redirect()->back()->with('success', 'Employee successfully update');
-        } catch (\Exception $e) {
-            // Log the exception or handle it in a way that makes sense for your application
-            return redirect()->back()->with('error', 'An error occurred while updating the employee');
-           
-        }
+       
     }
 
     public function previewemployee($id)
@@ -211,6 +205,58 @@ class EmployeeController extends Controller
         } else {
             abort(404);
         }
+    }
+    public function archive($id)
+    {
+        $user = User::getId($id);
+        $user->is_archive = 2;
+        $user->date_archive = now()->format('Y-m-d H:i:s');
+        $user->save();
+
+        return redirect()->back()->with('success', 'Employee successfully archived');
+       
+    }
+    public function restore($id)
+    {
+        $user = User::getId($id);
+        $user->is_archive = 1;
+        $user->date_archive = null;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Employee successfully restore');
+    }
+
+    public function archiveemployee(Request $request)
+
+
+    {
+
+        $query = User::getArchiveEmployee();
+
+        $search = $request->input('search');
+
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw("CONCAT(name, ' ', lastname) LIKE ?", ["%$search%"])
+                    ->orWhere('custom_id', 'LIKE', "%$search%")
+                    ->orWhere('department', 'LIKE', "%$search%")
+                    ->orWhere('email', 'LIKE', "%$search%")
+                    ->orWhere('end_of_contract', 'LIKE', "%$search%")
+                    ->orWhere('position', 'LIKE', "%$search%")
+                    ->orWhere('daily_rate', 'LIKE', "%$search%");
+            });
+        }
+
+        $data['getEmployee'] = $query->orderBy('id', 'desc')->paginate(10);
+
+
+        $viewPath = Auth::user()->user_type == 0
+            ? 'superadmin.employee.archiveemployee'
+            : (Auth::user()->user_type == 1
+                ? 'admin.employee.archiveemployee'
+                : 'employee.dashboard');
+
+        return view($viewPath, $data);
     }
 
 

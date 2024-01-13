@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Preview- {{$getId->name}} {{$getId->lastname}}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -81,7 +81,7 @@
             </div>
             <div class="col-sm-4 col-xl-4 text-start text-dark ">
                 <p>Address:</p>
-                <p>{{$getId->address}}</p>
+                <p>{{$getId->fulladdress}}</p>
             </div>
             <div class="col-sm-8 col-xl-8 text-dark">
                 <p>Birth Date:</p>
@@ -89,7 +89,7 @@
             </div>
             <div class="col-sm-12 col-xl-12 text-dark">
                 <p>Marital Status:</p>
-                <p>{{$getId->status}}</p>
+                <p>{{$getId->civil_status}}</p>
             </div>
             <div class=" bg-success " style="height:50%; width:100%">
                 <p class=" d-flex justify-content-center align-items-center">
@@ -134,20 +134,20 @@
                 <h3 class=" text-start  text-white">Emergency Contact Information:</h3>
                 </p>
             </div>
-            <h3 class="text-dark">{{$getId->name}} {{$getId->middlename}} {{$getId->lastname}}</h3>
+            <h3 class="text-dark">{{$getId->emergency_fullname}}</h3>
             <div class="col-sm-12 col-xl-12">
                 <div class="row g-4">
                     <div class="col-sm-4 col-xl-4 text-start text-dark ">
                         <p>Address:</p>
-                        <p>{{$getId->address}}</p>
+                        <p>{{$getId->emergency_fulladdress}}</p>
                     </div>
                     <div class="col-sm-4 col-xl-4 text-dark">
                         <p>Phone Number:</p>
-                        <p>{{$getId->phonenumber}}</p>
+                        <p>{{$getId->emergency_phonenumber}}</p>
                     </div>
                     <div class="col-sm-4 col-xl-4 text-start text-dark ">
                         <p>Relationship:</p>
-                        <p>{{$getId->relationship}}</p>
+                        <p>{{$getId->emergency_relationship}}</p>
                     </div>
                 </div>
             </div>

@@ -4,10 +4,11 @@
     <div class="row g-4">
         <div class="col-sm-12 col-xl-12">
             <div class="row g-4">
-            @include('layouts._message')
+                @include('layouts._message')
                 <div class="col-sm-12 col-xl-12">
                     <div>
-                        <h2 class="text-dark text-start border-bottom border-success">Edit {{$getId->name}} {{$getId->lastname}}</h2>
+                        <h2 class="text-dark text-start border-bottom border-success">Edit {{$getId->name}}
+                            {{$getId->lastname}}</h2>
                     </div>
                     <div class="bg-white text-center p-4">
                         <div class="user-head">
@@ -15,9 +16,9 @@
                                 <a>Admin Controller</a>
                             </div>
                             <form method="post" action="" enctype="multipart/form-data">
-                              @csrf
+                                @csrf
                                 <div class="row g-4">
-                                   
+
                                     <div class="col-sm-12 col-xl-12">
                                         <div class="fields">
                                             <div class="input-field">
@@ -40,16 +41,26 @@
                                                 <label for="suffix">Position</label>
                                                 <select class="form-control" name="position">
                                                     <option selected disabled>--Select position--</option>
-                                                    <option value="Position 1" @if($getId->position == 'Position 1') selected @endif>Position 1</option>
-                                                    <option value="Position 2" @if($getId->position == 'Position 2') selected @endif>Position 2</option>
-                                                    <option value="Position 3" @if($getId->position == 'Position 3') selected @endif>Position 3</option>
-                                                    <option value="Position 4" @if($getId->position == 'Position 4') selected @endif>Position 4</option>
-                                                    <option value="Position 5" @if($getId->position == 'Position 5') selected @endif>Position 5</option>
-                                                    <option value="Position 6" @if($getId->position == 'Position 6') selected @endif>Position 6</option>
-                                                    <option value="Position 7" @if($getId->position == 'Position 7') selected @endif>Position 7</option>
-                                                    <option value="Position 8" @if($getId->position == 'Position 8') selected @endif>Position 8</option>
-                                                    <option value="Position 9" @if($getId->position == 'Position 9') selected @endif>Position 9</option>
-                                                    <option value="Position 10" @if($getId->position == 'Position 10') selected @endif>Position 10</option>
+                                                    <option value="Position 1" @if($getId->position == 'Position 1')
+                                                        selected @endif>Position 1</option>
+                                                    <option value="Position 2" @if($getId->position == 'Position 2')
+                                                        selected @endif>Position 2</option>
+                                                    <option value="Position 3" @if($getId->position == 'Position 3')
+                                                        selected @endif>Position 3</option>
+                                                    <option value="Position 4" @if($getId->position == 'Position 4')
+                                                        selected @endif>Position 4</option>
+                                                    <option value="Position 5" @if($getId->position == 'Position 5')
+                                                        selected @endif>Position 5</option>
+                                                    <option value="Position 6" @if($getId->position == 'Position 6')
+                                                        selected @endif>Position 6</option>
+                                                    <option value="Position 7" @if($getId->position == 'Position 7')
+                                                        selected @endif>Position 7</option>
+                                                    <option value="Position 8" @if($getId->position == 'Position 8')
+                                                        selected @endif>Position 8</option>
+                                                    <option value="Position 9" @if($getId->position == 'Position 9')
+                                                        selected @endif>Position 9</option>
+                                                    <option value="Position 10" @if($getId->position == 'Position 10')
+                                                        selected @endif>Position 10</option>
                                                 </select>
                                                 @if($errors->has('position'))
                                                 <span class="text-danger">{{ $errors->first('position') }}</span>
@@ -57,8 +68,8 @@
                                             </div>
                                             <div class="input-field">
                                                 <label>End of Contract</label>
-                                                <input type="date"  class="form-control"
-                                                    name="end_of_contract" value="{{$getId->end_of_contract}}" required>
+                                                <input type="date" class="form-control" name="end_of_contract"
+                                                    value="{{$getId->end_of_contract}}" required>
                                                 @if($errors->has('birth_date'))
                                                 <span class="text-danger">{{ $errors->first('birth_date') }}</span>
                                                 @endif
@@ -71,6 +82,17 @@
                                                 <span class="text-danger">{{ $errors->first('daily_rate') }}</span>
                                                 @endif
                                             </div>
+                                            <div class="input-field">
+                                                <label>Current Credit</label>
+                                                <input type="numeric" class="form-control" name="credit"
+                                                    placeholder="e.g., 560" value="{{$getId->credit}}" required>
+                                                @if($errors->has('credit'))
+                                                <span class="text-danger">{{ $errors->first('credit') }}</span>
+                                                @endif
+                                            </div>
+
+                                           
+            
                                         </div>
                                     </div>
                                 </div>
@@ -87,4 +109,5 @@
             </div>
         </div>
     </div>
+   
     @endsection

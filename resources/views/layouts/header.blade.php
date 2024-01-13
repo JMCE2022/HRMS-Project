@@ -45,7 +45,7 @@
                 @elseif(Auth::user()->user_type == 1)
                 <img class="rounded-circle me-lg-2" src="{{ asset('img/user.png') }}" alt="" style="width: 40px; height: 40px;">
                 @elseif(Auth::user()->user_type == 2)
-                <img class="rounded-circle me-lg-2" src="{{ asset('img/useremp.png') }}" alt="" style="width: 40px; height: 40px;">
+                <img class="rounded-circle me-lg-2" src="{{ asset('public/accountprofile/' . Auth::user()->profile_pic) }}" alt="" style="width: 40px; height: 40px;">
                 @endif
 
                 <span class=" text-white d-none d-lg-inline-flex">{{Auth::user()->name}}</span>

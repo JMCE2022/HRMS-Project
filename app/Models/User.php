@@ -29,12 +29,19 @@ class User extends Authenticatable
         'suffix',
         'sex',
         'age',
-        'age',
+        'custom_id',
         'birth_date',
         'phonenumber',
         'department',
         'daily_rate',
         'credit',
+        'civil_status',
+        'fulladdress',
+        'emergency_fullname',
+        'emergency_phonenumber',
+        'emergency_relationship',
+        'emergency_fulladdress',
+        'profile_pic',
     ];
 
     /**
@@ -59,7 +66,14 @@ class User extends Authenticatable
 
     public static function getEmployee()
 {
-    return self::where('user_type', '=', 2);
+    return self::where('user_type', '=', 2)
+    ->where('is_archive', '=', 1);
+}
+
+public static function getArchiveEmployee()
+{
+    return self::where('user_type', '=', 2)
+    ->where('is_archive', '=', 2);
 }
 static public function getID($id)
     {

@@ -14,7 +14,7 @@
             @elseif(Auth::user()->user_type == 1)
             <img src="{{ asset('img/user.png') }}" alt="Admin">
             @elseif(Auth::user()->user_type == 2)
-            <img src="{{ asset('img/useremp.png') }}" alt="Employee">
+            <img src="{{ asset('public/accountprofile/' . Auth::user()->profile_pic) }}" alt="Employee">
             @endif
         </div>
         <div class="name">

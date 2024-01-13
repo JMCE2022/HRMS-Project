@@ -7329,7 +7329,7 @@ fieldset:disabled .btn {
 }
 
 .border-end {
-    border-right: 4px solid #000 !important
+    border-right: 1px solid #000 !important
 }
 
 .border-end-0 {
@@ -7337,7 +7337,7 @@ fieldset:disabled .btn {
 }
 
 .border-bottom {
-    border-bottom: 4px solid #000 !important
+    border-bottom: 1px solid #000 !important
 }
 
 .border-bottom-0 {

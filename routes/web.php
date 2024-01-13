@@ -33,11 +33,14 @@ Route::group(['middleware' => 'superadmin'], function () {
 
 
     Route::get('/SuperAdmin/Employee', [EmployeeController::class, 'employee']);
+    Route::get('/SuperAdmin/Employee/ArchiveEmployee', [EmployeeController::class, 'archiveemployee']);
     Route::get('/SuperAdmin/Employee/AddEmployee', [EmployeeController::class, 'addemployee']);
     Route::post('/SuperAdmin/Employee/AddEmployee', [EmployeeController::class, 'insertemployee']);
     Route::get('/SuperAdmin/Employee/EditEmployee/{id}', [EmployeeController::class, 'editemployee']);
     Route::post('/SuperAdmin/Employee/EditEmployee/{id}', [EmployeeController::class, 'updateemployee']);
     Route::get('/SuperAdmin/Employee/PreviewEmployee/{id}', [EmployeeController::class, 'previewemployee']);
+    Route::get('/SuperAdmin/Employee/Archive/{id}', [EmployeeController::class, 'archive']);
+    Route::get('/SuperAdmin/Employee/Restore/{id}', [EmployeeController::class, 'restore']);
 
 
     Route::get('/SuperAdmin/Leave', [LeaveController::class, 'leave']);
@@ -57,11 +60,14 @@ Route::group(['middleware' => 'admin'], function () {
 
 
     Route::get('/Admin/Employee', [EmployeeController::class, 'employee']);
+    Route::get('/Admin/ArchiveEmployee', [EmployeeController::class, 'archiveemployee']);
     Route::get('/Admin/Employee/AddEmployee', [EmployeeController::class, 'addemployee']);
     Route::post('/Admin/Employee/AddEmployee', [EmployeeController::class, 'insertemployee']);
     Route::get('/Admin/Employee/EditEmployee/{id}', [EmployeeController::class, 'editemployee']);
     Route::post('/Admin/Employee/EditEmployee/{id}', [EmployeeController::class, 'updateemployee']);
     Route::get('/Admin/Employee/PreviewEmployee/{id}', [EmployeeController::class, 'previewemployee']);
+    Route::get('/Admin/Employee/Archive/{id}', [EmployeeController::class, 'archive']);
+    Route::get('/Admin/Employee/Restore/{id}', [EmployeeController::class, 'restore']);
 
 
     Route::get('/Admin/Leave', [LeaveController::class, 'leave']);
@@ -81,6 +87,7 @@ Route::group(['middleware' => 'employee'], function () {
     Route::get('/Employee/Leave', [LeaveController::class, 'leave']);
     Route::get('/Employee/Message', [MessageController::class, 'message']);
     Route::get('/Employee/MyAccount', [MyAccountController::class, 'myaccount']);
+    Route::post('/Employee/MyAccount', [MyAccountController::class, 'updatemyaccount']);
     Route::get('/Employee/Setting', [SettingController::class, 'setting']);
 });
 

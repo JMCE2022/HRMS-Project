@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Config;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -20,5 +21,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+
+         // Get the timezone from the user or any other source
+         $userTimezone = 'Asia/Manila';
+
+         // Set the application timezone dynamically
+         Config::set('app.timezone', $userTimezone);
     }
 }

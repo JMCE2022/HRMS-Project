@@ -83,4 +83,25 @@
             document.querySelector('form').submit();
         }
     </script>
+   <script>
+    function handleImageClick(event) {
+        // Prevent the default behavior of the click event on the label
+        event.preventDefault();
+
+        // Trigger file input click when the image is clicked
+        document.getElementById('profileImage').click();
+    }
+
+    function displayImage(input) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            document.getElementById('profilePicture').src = e.target.result;
+        };
+
+        if (input.files && input.files[0]) {
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 </html>

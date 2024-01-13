@@ -14,7 +14,7 @@
                             <div class="bg-white rounded h-100 p-4">
                             @include('layouts._message')
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <h6 class=" text-dark ">List of Employees</h6>
+                                    <h6 class=" text-dark ">List of Archived Employees</h6>
 
 
                                     <div class="d-flex justify-content-between align-items-center">
@@ -28,12 +28,11 @@
                                                 onclick="clearSearch()">Clear</button>
                                         </form>
                                         @if(Auth::user()->user_type == 0)
-                                        <a href="{{url('SuperAdmin/Employee/AddEmployee')}}"
-                                            class="btn btn-success "><i class="fas fa-user-plus" style="color: #ffffff;"></i> Add Employee</a>
-                                            <a href="{{url('SuperAdmin/Employee/ArchiveEmployee')}}" class="m-1 btn btn-warning "><i class="far fa-file-archive" style="color: #000000;"></i> Archived</a>
+                                        
+                                            <a href="{{url('SuperAdmin/Employee')}}" class="m-1 btn btn-primary ">Back</a>
                                             @elseif(Auth::user()->user_type == 1)
-                                        <a href="{{url('Admin/Employee/AddEmployee')}}" class="btn btn-success ">Add Employee</a>
-                                        <a href="{{url('SuperAdmin/Employee/ArchiveEmployee')}}" class="m-1 btn btn-warning "><i class="far fa-file-archive" style="color: #000000;"></i> Archived</a>
+                                        
+                                            <a href="{{url('Admin/Employee')}}" class="m-1 btn btn-primary ">Back</a>
                                         @endif
                                     </div>
                                 </div>
@@ -47,10 +46,9 @@
                                                 <th scope="col">Email</th>
                                                 <th scope="col">Department</th>
                                                 <th scope="col">Position</th>
-                                                <th scope="col">End of Contract</th>
-                                                <th scope="col">Edit</th>
-                                                <th scope="col">Preview</th>
-                                                <th scope="col">Archive</th>
+                                                <th scope="col">Date Archive</th>
+                                                <th scope="col">Restore</th>
+                                               
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -63,20 +61,18 @@
                                                 <td>{{ $employee->email}}</td>
                                                 <td>{{ $employee->department}}</td>
                                                 <td>{{ $employee->position}}</td>
-                                                <td>{{ $employee->end_of_contract}}</td>
+                                                <td>{{ $employee->date_archive}}</td>
                                                 @if(Auth::user()->user_type == 0)
                                                 <td>
-                                                    <a class="bg-skyblue rounded-1"  href="{{ url('SuperAdmin/Employee/EditEmployee/'.$employee->id)}}"> <i class="fas fa-user-edit" style="color: #ffffff;"></i></a>
+                                                    <a class=" rounded-1"  href="{{ url('SuperAdmin/Employee/Restore/'.$employee->id)}}"> <i class="fas fa-trash-restore" style="color: #63E6BE;"></i></a>
                                                 </td>
-                                                <td> <a class=" rounded-1" href="{{ url('SuperAdmin/Employee/PreviewEmployee/'.$employee->id) }}"> <i class="far fa-file-pdf" style="color: #000000;"></i></a></td>
-                                                <td><a class="bg-danger rounded-1" href="{{ url('SuperAdmin/Employee/Archive/'.$employee->id) }}"> <i class="fas fa-user-times" style="color: #ffffff;"></i></a></td>
+                                                
                                                 @elseif(Auth::user()->user_type == 1)
                                                 <td>
-                                                    <a class="bg-skyblue rounded-1"  href="{{ url('Admin/Employee/EditEmployee/'.$employee->id)}}"> <i class="fas fa-user-edit" style="color: #ffffff;"></i></a>
+                                                    <a class=" rounded-1"  href="{{ url('Admin/Employee/Restore/'.$employee->id)}}"> <i class="fas fa-trash-restore" style="color: #63E6BE;"></i></a>
                                                    
                                                 </td>
-                                                <td> <a class=" rounded-1" href="{{ url('Admin/Employee/PreviewEmployee/'.$employee->id) }}"> <i class="far fa-file-pdf" style="color: #000000;"></i></a></td>
-                                                <td><a class="bg-danger rounded-1" href="{{ url('Admin/Employee/Archive/'.$employee->id) }}"> <i class="fas fa-user-times" style="color: #ffffff;"></i></a></td>
+                                               
                                                 @endif
                                             </tr>
                                             @endforeach
