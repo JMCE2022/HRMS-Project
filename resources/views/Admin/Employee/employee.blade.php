@@ -33,7 +33,7 @@
                                             <a href="{{url('SuperAdmin/Employee/ArchiveEmployee')}}" class="m-1 btn btn-warning "><i class="far fa-file-archive" style="color: #000000;"></i> Archived</a>
                                             @elseif(Auth::user()->user_type == 1)
                                         <a href="{{url('Admin/Employee/AddEmployee')}}" class="btn btn-success ">Add Employee</a>
-                                        <a href="{{url('SuperAdmin/Employee/ArchiveEmployee')}}" class="m-1 btn btn-warning "><i class="far fa-file-archive" style="color: #000000;"></i> Archived</a>
+                                        <a href="{{url('Admin/Employee/ArchiveEmployee')}}" class="m-1 btn btn-warning "><i class="far fa-file-archive" style="color: #000000;"></i> Archived</a>
                                         @endif
                                     </div>
                                 </div>

@@ -60,7 +60,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 
     Route::get('/Admin/Employee', [EmployeeController::class, 'employee']);
-    Route::get('/Admin/ArchiveEmployee', [EmployeeController::class, 'archiveemployee']);
+    Route::get('/Admin/Employee/ArchiveEmployee', [EmployeeController::class, 'archiveemployee']);
     Route::get('/Admin/Employee/AddEmployee', [EmployeeController::class, 'addemployee']);
     Route::post('/Admin/Employee/AddEmployee', [EmployeeController::class, 'insertemployee']);
     Route::get('/Admin/Employee/EditEmployee/{id}', [EmployeeController::class, 'editemployee']);
