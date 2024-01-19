@@ -47,7 +47,8 @@ Route::group(['middleware' => 'superadmin'], function () {
 
 
 
-    Route::get('/SuperAdmin/Announcement', [AnnouncementController::class, 'announcement']);
+    Route::get('SuperAdmin/Announcement', [AnnouncementController::class, 'announcement']);
+    Route::post('SuperAdmin/Announcement', [AnnouncementController::class, 'save_task']);
 
 
 
@@ -58,7 +59,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/Admin/Dashboard', [DashboardController::class, 'dashboard']);
 
 
-
+    
     Route::get('/Admin/Employee', [EmployeeController::class, 'employee']);
     Route::get('/Admin/Employee/ArchiveEmployee', [EmployeeController::class, 'archiveemployee']);
     Route::get('/Admin/Employee/AddEmployee', [EmployeeController::class, 'addemployee']);
@@ -75,6 +76,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 
     Route::get('/Admin/Announcement', [AnnouncementController::class, 'announcement']);
+    Route::post('Admin/Announcement', [AnnouncementController::class, 'save_task']);
 
 
 

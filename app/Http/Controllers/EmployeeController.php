@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use DB;
 
 
 class EmployeeController extends Controller
@@ -15,7 +16,8 @@ class EmployeeController extends Controller
 
 
     {
-
+        $notification ['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
+    
         $query = User::getEmployee();
 
         $search = $request->input('search');
@@ -41,18 +43,20 @@ class EmployeeController extends Controller
                 ? 'admin.employee.employee'
                 : 'employee.dashboard');
 
-        return view($viewPath, $data);
+        return view($viewPath, $data,$notification);
     }
 
     public function addemployee()
     {
+        $notification ['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
+       
         $viewPath = Auth::user()->user_type == 0
             ? 'superadmin.employee.addemployee'
             : (Auth::user()->user_type == 1
                 ? 'admin.employee.addemployee'
                 : 'employee.dashboard');
 
-        return view($viewPath);
+        return view($viewPath,$notification);
     }
 
     public function insertemployee(Request $request)
@@ -140,6 +144,8 @@ class EmployeeController extends Controller
 
     public function editemployee($id)
     {
+        $notification ['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
+       
         $data['getId'] = User::getId($id);
 
         if (!empty($data['getId'])) {
@@ -149,7 +155,7 @@ class EmployeeController extends Controller
                 ? 'admin.employee.editemployee'
                 : 'employee.dashboard');
 
-        return view($viewPath,$data);
+        return view($viewPath,$data,$notification);
         } else {
             abort(404);
         }
@@ -192,6 +198,8 @@ class EmployeeController extends Controller
 
     public function previewemployee($id)
     {
+        $notification ['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
+       
         $data['getId'] = User::getId($id);
 
         if (!empty($data['getId'])) {
@@ -201,7 +209,7 @@ class EmployeeController extends Controller
                 ? 'admin.employee.previewemployee'
                 : 'employee.dashboard');
 
-        return view($viewPath,$data);
+        return view($viewPath,$data,$notification);
         } else {
             abort(404);
         }
@@ -230,6 +238,8 @@ class EmployeeController extends Controller
 
 
     {
+        $notification ['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
+       
 
         $query = User::getArchiveEmployee();
 
@@ -256,7 +266,7 @@ class EmployeeController extends Controller
                 ? 'admin.employee.archiveemployee'
                 : 'employee.dashboard');
 
-        return view($viewPath, $data);
+        return view($viewPath, $data,$notification);
     }
 
 

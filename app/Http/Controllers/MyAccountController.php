@@ -7,10 +7,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use DB;
 class MyAccountController extends Controller
 {
     public function myaccount()
     {
+        $notification ['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
+    
 
        
 
@@ -20,7 +23,7 @@ class MyAccountController extends Controller
                 ? 'admin.dashboard'
                 : 'employee.myaccount.myaccount');
 
-        return view($viewPath);
+        return view($viewPath,$notification);
     }
 
     public function updatemyaccount(Request $request)
