@@ -8,12 +8,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use DB;
+use App\Models\Message;
 class MyAccountController extends Controller
 {
     public function myaccount()
     {
         $notification ['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
-    
+        $query = Message::getNotify();
+        $getNot['getNotify'] = $query->orderBy('id', 'desc')->take(10)->get();
 
        
 
@@ -23,7 +25,11 @@ class MyAccountController extends Controller
                 ? 'admin.dashboard'
                 : 'employee.myaccount.myaccount');
 
-        return view($viewPath,$notification);
+        
+        return view($viewPath,[
+            'notification' => $notification,
+            'getNot' => $getNot,
+        ]);
     }
 
     public function updatemyaccount(Request $request)

@@ -8,20 +8,22 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use DB;
+use App\Models\Message;
 
 
 class EmployeeController extends Controller
 {
     public function employee(Request $request)
-
-
     {
-        $notification ['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
+        $notification['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
+    
+        $query = Message::getNotify();
+        $getNot['getNotify'] = $query->orderBy('id', 'desc')->take(10)->get();
     
         $query = User::getEmployee();
-
+    
         $search = $request->input('search');
-
+    
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->whereRaw("CONCAT(name, ' ', lastname) LIKE ?", ["%$search%"])
@@ -33,30 +35,37 @@ class EmployeeController extends Controller
                     ->orWhere('daily_rate', 'LIKE', "%$search%");
             });
         }
-
+    
         $data['getEmployee'] = $query->orderBy('id', 'desc')->paginate(10);
-
-
+    
         $viewPath = Auth::user()->user_type == 0
             ? 'superadmin.employee.employee'
             : (Auth::user()->user_type == 1
                 ? 'admin.employee.employee'
                 : 'employee.dashboard');
-
-        return view($viewPath, $data,$notification);
+    
+        return view($viewPath, $data,[
+            'notification' => $notification,
+            'getNot' => $getNot,
+        ]);
     }
-
+    
     public function addemployee()
     {
         $notification ['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
-       
+        $query = Message::getNotify();
+        $getNot['getNotify'] = $query->orderBy('id', 'desc')->take(10)->get();
         $viewPath = Auth::user()->user_type == 0
             ? 'superadmin.employee.addemployee'
             : (Auth::user()->user_type == 1
                 ? 'admin.employee.addemployee'
                 : 'employee.dashboard');
 
-        return view($viewPath,$notification);
+       
+        return view($viewPath,[
+            'notification' => $notification,
+            'getNot' => $getNot,
+        ]);
     }
 
     public function insertemployee(Request $request)
@@ -145,7 +154,8 @@ class EmployeeController extends Controller
     public function editemployee($id)
     {
         $notification ['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
-       
+        $query = Message::getNotify();
+        $getNot['getNotify'] = $query->orderBy('id', 'desc')->take(10)->get();
         $data['getId'] = User::getId($id);
 
         if (!empty($data['getId'])) {
@@ -155,7 +165,11 @@ class EmployeeController extends Controller
                 ? 'admin.employee.editemployee'
                 : 'employee.dashboard');
 
-        return view($viewPath,$data,$notification);
+        
+        return view($viewPath, $data,[
+            'notification' => $notification,
+            'getNot' => $getNot,
+        ]);
         } else {
             abort(404);
         }
@@ -199,7 +213,8 @@ class EmployeeController extends Controller
     public function previewemployee($id)
     {
         $notification ['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
-       
+        $query = Message::getNotify();
+        $getNot['getNotify'] = $query->orderBy('id', 'desc')->take(10)->get();
         $data['getId'] = User::getId($id);
 
         if (!empty($data['getId'])) {
@@ -209,7 +224,11 @@ class EmployeeController extends Controller
                 ? 'admin.employee.previewemployee'
                 : 'employee.dashboard');
 
-        return view($viewPath,$data,$notification);
+        
+        return view($viewPath, $data,[
+            'notification' => $notification,
+            'getNot' => $getNot,
+        ]);
         } else {
             abort(404);
         }
@@ -240,7 +259,8 @@ class EmployeeController extends Controller
     {
         $notification ['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
        
-
+        $query = Message::getNotify();
+        $getNot['getNotify'] = $query->orderBy('id', 'desc')->take(10)->get();
         $query = User::getArchiveEmployee();
 
         $search = $request->input('search');
@@ -266,7 +286,11 @@ class EmployeeController extends Controller
                 ? 'admin.employee.archiveemployee'
                 : 'employee.dashboard');
 
-        return view($viewPath, $data,$notification);
+       
+        return view($viewPath, $data,[
+            'notification' => $notification,
+            'getNot' => $getNot,
+        ]);
     }
 
 

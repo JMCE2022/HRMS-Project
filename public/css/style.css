@@ -566,3 +566,6 @@ hr {
 .hidden{
     display: none;
 }
+.custom-width {
+    width: 300px !important; /* Use !important to ensure the style takes precedence */
+}
