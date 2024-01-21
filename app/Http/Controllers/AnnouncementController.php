@@ -15,7 +15,25 @@ class AnnouncementController extends Controller
 {
     public function announcement()
     {
-        $notification ['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
+        $notification['notify'] = DB::select("
+    SELECT
+        users.id,
+        users.name,
+        users.lastname,
+        users.email,
+        COUNT(messages.is_read) AS unread
+    FROM
+        users
+    LEFT JOIN
+        messages ON users.id = messages.send_to AND messages.is_read = 0
+    WHERE
+        users.id = " . Auth::id() . "
+    GROUP BY
+        users.id, users.name, users.lastname, users.email
+");
+
+
+
         $query = Message::getNotify();
         $getNot['getNotify'] = $query->orderBy('id', 'desc')->take(10)->get();
 
@@ -30,6 +48,14 @@ class AnnouncementController extends Controller
             'notification' => $notification,
             'getNot' => $getNot,
         ]);
+    }
+
+    public function read($id){
+
+        $read = Message::getID($id);
+        $read->is_read=1;
+        $read->save();
+        return redirect()->back();
     }
     
     public function save_task(Request $request)
@@ -48,13 +74,17 @@ class AnnouncementController extends Controller
     $task->description = $request->description;
 
     $title = $request->title;
+    $description = $request->description;
 
     $users = User::all(); // Get all users
 
     foreach ($users as $user) {
         $message = new Message;
-        $message->from = $user->id;
-        $message->message = $title;
+        $message->send_to = $user->id;
+        $message->from = Auth::user()->name;
+        $message->profile_pic = Auth::user()->profile_pic;
+        $message->title_message = $title;
+        $message-> description_message= $description;
         $message->save();
 
         // Send notification to each user using Pusher or any other method you're using
@@ -70,7 +100,7 @@ class AnnouncementController extends Controller
             $options
         );
 
-        $data = ['from' => $user->id];
+        $data = ['send_to' => $user->id];
         $pusher->trigger('my-channel', 'my-event', $data);
     }
 

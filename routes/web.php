@@ -43,12 +43,14 @@ Route::group(['middleware' => 'superadmin'], function () {
     Route::get('/SuperAdmin/Employee/Restore/{id}', [EmployeeController::class, 'restore']);
 
 
+
     Route::get('/SuperAdmin/Leave', [LeaveController::class, 'leave']);
 
 
 
-    Route::get('SuperAdmin/Announcement', [AnnouncementController::class, 'announcement']);
-    Route::post('SuperAdmin/Announcement', [AnnouncementController::class, 'save_task']);
+    Route::get('/SuperAdmin/Announcement', [AnnouncementController::class, 'announcement']);
+    Route::post('/SuperAdmin/Announcement', [AnnouncementController::class, 'save_task']);
+    Route::get('/SuperAdmin/Read/{id}', [AnnouncementController::class, 'read']);
 
 
 
@@ -77,6 +79,7 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::get('/Admin/Announcement', [AnnouncementController::class, 'announcement']);
     Route::post('Admin/Announcement', [AnnouncementController::class, 'save_task']);
+    Route::get('/Admin/Read/{id}', [AnnouncementController::class, 'read']);
 
 
 
@@ -90,6 +93,7 @@ Route::group(['middleware' => 'employee'], function () {
     Route::get('/Employee/Message', [MessageController::class, 'message']);
     Route::get('/Employee/MyAccount', [MyAccountController::class, 'myaccount']);
     Route::post('/Employee/MyAccount', [MyAccountController::class, 'updatemyaccount']);
+    Route::get('/Employee/Read/{id}', [AnnouncementController::class, 'read']);
     Route::get('/Employee/Setting', [SettingController::class, 'setting']);
 });
 

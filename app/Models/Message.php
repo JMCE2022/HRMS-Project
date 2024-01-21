@@ -13,17 +13,25 @@ class Message extends Model
 
     public $table = 'messages';
     protected $fillable = [
+        'sent_to',
         'from',
-        'email',
-        'message',
+        'profile_pic',
+        'title_message',
+        'description_message',
         'is_read',
         
     ];
 
     public static function getNotify()
 {
-    return self::where('from', '=', Auth::user()->id)
+    return self::where('send_to', '=', Auth::user()->id)
     ->where('is_read', '=', 0);
 }
+    static public function getID($id)
+    {
+        return self::find($id);
+    }
+
+
 
 }

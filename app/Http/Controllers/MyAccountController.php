@@ -13,7 +13,22 @@ class MyAccountController extends Controller
 {
     public function myaccount()
     {
-        $notification ['notify'] = DB::select("SELECT users.id, users.name, users.lastname, users.email, COUNT(is_read) AS unread FROM users LEFT JOIN messages ON users.id = messages.from AND messages.is_read = 0 WHERE users.id = " . Auth::id() . " GROUP BY users.id, users.name, users.lastname, users.email");
+        $notification['notify'] = DB::select("
+    SELECT
+        users.id,
+        users.name,
+        users.lastname,
+        users.email,
+        COUNT(messages.is_read) AS unread
+    FROM
+        users
+    LEFT JOIN
+        messages ON users.id = messages.send_to AND messages.is_read = 0
+    WHERE
+        users.id = " . Auth::id() . "
+    GROUP BY
+        users.id, users.name, users.lastname, users.email
+");
         $query = Message::getNotify();
         $getNot['getNotify'] = $query->orderBy('id', 'desc')->take(10)->get();
 

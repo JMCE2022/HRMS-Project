@@ -13,19 +13,14 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('from');
-            $table->text('message');
+            $table->bigInteger('send_to');
+            $table->string('from',30);
+            $table->string('profile_pic', 255);
+            $table->text('title_message');
+            $table->text('description_message');
             $table->tinyInteger('is_read')->default(0);
             $table->timestamps();
         });
-
-        DB::table('messages')->insert([
-            'from' => 1,
-            'message' => 'Welcome!',
-            'is_read' => 0,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
     }
 
     /**

@@ -9,13 +9,8 @@
 
     <div class="sidebar-main">
         <div class="sidebar-user">
-            @if(Auth::user()->user_type == 0)
-            <img src="{{ asset('img/user3.png') }}" alt="Super Admin">
-            @elseif(Auth::user()->user_type == 1)
-            <img src="{{ asset('img/user.png') }}" alt="Admin">
-            @elseif(Auth::user()->user_type == 2)
+            
             <img src="{{ asset('public/accountprofile/' . Auth::user()->profile_pic) }}" alt="Employee">
-            @endif
         </div>
         <div class="name">
             <h3 class="text-dark">{{Auth::user()->name}}</h3>

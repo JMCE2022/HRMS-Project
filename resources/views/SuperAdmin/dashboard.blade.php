@@ -49,7 +49,9 @@
                             </div>
                             <div class=" col-sm-4 col-xl-4">
                                 <span class="">
-                                    <h3 class="fs-5 text-start text-dark">2</h3>
+                                    @foreach($notification['notify'] as $key)
+                                    <h3 class="fs-5 text-start text-dark">{{$key->unread}}</h3>
+                                    @endforeach
                                     <p class="text-dark">Announcement</p>
                                 </span>
                             </div>
@@ -67,7 +69,7 @@
                         </div>
                         <div class="col-sm-12 col-xl-5 rounded">
                             <div class="bg-white rounded-3 h-100 p-4">
-                                <h6 class="mb-4 fs-2 text-primary" >Today's Birthday</h6>
+                                <h6 class="mb-4 fs-2 text-primary">Today's Birthday</h6>
                                 <div class="my-2 rounded-2 border-start border-primary">
                                     <span class=" d-flex justify-content-between align-items-center">
                                         <img class="my-1 mx-1" src="{{ asset('img/user.png') }}" alt="Employee"
@@ -92,7 +94,7 @@
                                         <i class="fas fa-birthday-cake" style="color: #000000;"></i>
                                     </span>
                                 </div>
-                            </div>            
+                            </div>
                         </div>
                     </div>
                 </div>
