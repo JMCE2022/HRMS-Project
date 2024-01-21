@@ -26,6 +26,7 @@
             </div>
         </div>
     </div>
+</section>
 
     @endsection
     @push('javascript')
