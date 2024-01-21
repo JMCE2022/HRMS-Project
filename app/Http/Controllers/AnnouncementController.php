@@ -37,6 +37,8 @@ class AnnouncementController extends Controller
         $query = Message::getNotify();
         $getNot['getNotify'] = $query->orderBy('id', 'desc')->take(10)->get();
 
+        $users['users'] = User::all();
+
         $viewPath = Auth::user()->user_type == 0
             ? 'superadmin.announcement.announcement'
             : (Auth::user()->user_type == 1
@@ -47,6 +49,7 @@ class AnnouncementController extends Controller
         return view($viewPath,[
             'notification' => $notification,
             'getNot' => $getNot,
+            'users' =>  $users['users'], // Access the 'users' array directly
         ]);
     }
 
@@ -65,18 +68,26 @@ class AnnouncementController extends Controller
     $request->validate([
         'title' => 'required|string|max:50',
         'description' => 'required|string',
+        'scheduled_date' => 'required|date',
+        'selected_users' => 'nullable|array', // Add this line for selected users
     ], [
         'title.required' => 'The title field is required.',
         'description.required' => 'The description field is required.',
+        'schedule_date.required' => 'The Scheduled field is required.',
     ]);
 
     $task->title = $request->title;
     $task->description = $request->description;
+    $task->scheduled_date = $request->input('scheduled_date') ? trim($request->input('scheduled_date')) : null;
 
     $title = $request->title;
     $description = $request->description;
 
-    $users = User::all(); // Get all users
+    // Check if specific users are selected
+    $selectedUsers = $request->input('selected_users', []);
+
+    // Get users based on selection
+    $users = $selectedUsers ? User::whereIn('id', $selectedUsers)->get() : User::all();
 
     foreach ($users as $user) {
         $message = new Message;
@@ -84,7 +95,7 @@ class AnnouncementController extends Controller
         $message->from = Auth::user()->name;
         $message->profile_pic = Auth::user()->profile_pic;
         $message->title_message = $title;
-        $message-> description_message= $description;
+        $message->description_message = $description;
         $message->save();
 
         // Send notification to each user using Pusher or any other method you're using
@@ -108,8 +119,9 @@ class AnnouncementController extends Controller
 
     broadcast(new TaskCreated($task, $message));
 
-    return redirect()->back()->with('success', 'Task successfully added');
+    return redirect()->back()->with('success', 'Announcement successfully sent');
 }
+
 
 
 }

@@ -7345,7 +7345,7 @@ fieldset:disabled .btn {
 }
 
 .border-start {
-    border-left: 4px solid #000 !important
+    border-left: 1px solid #000 !important
 }
 
 .border-start-0 {

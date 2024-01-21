@@ -135,7 +135,7 @@
                                                     <option value="Position 1">Position 1</option>
                                                     <option value="Position 2">Position 2</option>
                                                     <option value="Position 3">Position 3</option>
-                                                    <option value="Position 4<">Position 4</option>
+                                                    <option value="Position 4">Position 4</option>
                                                     <option value="Position 5">Position 5</option>
                                                     <option value="Position 6">Position 6</option>
                                                     <option value="Position 7">Position 7</option>

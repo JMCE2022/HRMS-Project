@@ -41,6 +41,7 @@
                 </div>
                 <div class="col-sm-4 col-xl-4">
                     <div class="bg-white text-center rounded-3  p-4">
+
                         <div class="row g-4">
                             <div
                                 class="d-flex justify-content-center align-items-center rounded-3 col-sm-4 col-xl-4 bg-light">
@@ -100,4 +101,4 @@
             </div>
         </div>
     </div>
-@endsection
+    @endsection

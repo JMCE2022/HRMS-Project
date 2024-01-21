@@ -39,7 +39,7 @@ return new class extends Migration
             $table->text('emergency_fulladdress')->nullable();
             $table->string('emergency_phonenumber', 20)->nullable();
             $table->string('emergency_relationship', 50)->nullable();
-            $table->string('profile_pic', 255)->nullable();
+            $table->string('profile_pic', 255)->default('default.png');
             $table->rememberToken();
             $table->timestamps();
         });

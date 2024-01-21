@@ -103,4 +103,41 @@
         }
     }
 </script>
+
+
+
+
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all checkboxes
+        const checkboxes = document.querySelectorAll('input[name="selected_users[]"]');
+
+        checkboxes.forEach(function(checkbox) {
+            // Add event listener to each checkbox
+            checkbox.addEventListener('change', function() {
+                // Get the parent row of the checkbox
+                const row = checkbox.closest('tr');
+
+                // Toggle the 'selected-row' class based on checkbox status
+                if (checkbox.checked) {
+                    row.classList.add('selected-row');
+                } else {
+                    row.classList.remove('selected-row');
+                }
+            });
+
+            // Add click event to the entire row to toggle checkbox state
+            const row = checkbox.closest('tr');
+            row.addEventListener('click', function() {
+                checkbox.checked = !checkbox.checked;
+                // Trigger change event manually
+                checkbox.dispatchEvent(new Event('change'));
+            });
+        });
+    });
+</script>
 </html>
