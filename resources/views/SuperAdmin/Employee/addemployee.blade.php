@@ -75,19 +75,19 @@
                                                 </select>
                                             </div>
                                             <div class="input-field">
-                                                <label>Age</label>
-                                                <input type="number" placeholder="Enter Age" class="form-control"
-                                                    name="age" value="" required>
-                                                @if($errors->has('age'))
-                                                <span class="text-danger">{{ $errors->first('age') }}</span>
+                                                <label>Birth Date</label>
+                                                <input type="date" placeholder="Enter Birth Date" class="form-control"
+                                                    name="birth_date" id="birth_date" value="" required>
+                                                @if($errors->has('birth_date'))
+                                                <span class="text-danger">{{ $errors->first('birth_date') }}</span>
                                                 @endif
                                             </div>
                                             <div class="input-field">
-                                                <label>Birth Date</label>
-                                                <input type="date" placeholder="Enter Birth Date" class="form-control"
-                                                    name="birth_date" value="" required>
-                                                @if($errors->has('birth_date'))
-                                                <span class="text-danger">{{ $errors->first('birth_date') }}</span>
+                                            <label>Age</label>
+                                                <input type="number" placeholder="Enter Age" class="form-control"
+                                                    name="age" id="age" value="" required>
+                                                @if($errors->has('age'))
+                                                <span class="text-danger">{{ $errors->first('age') }}</span>
                                                 @endif
                                             </div>
                                             <div class="input-field">

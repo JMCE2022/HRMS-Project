@@ -4,7 +4,7 @@
     <div class="row g-4">
         <div class="col-sm-12 col-xl-12">
             <div class="row g-4">
-            @include('layouts._message')
+                @include('layouts._message')
                 <div class="col-sm-12 col-xl-12">
                     <div>
                         <h2 class="text-dark text-start border-bottom border-success">Add New Employee</h2>
@@ -14,9 +14,9 @@
                             <div class="d-flex justify-content-between border-bottom  ">
                                 <a>Admin Controller</a>
                             </div>
-                           
-                            <form method="post" action="" >
-                              @csrf
+
+                            <form method="post" action="">
+                                @csrf
                                 <div class="row g-4">
                                     <div class="col-sm-6 col-xl-6">
                                         <div class="fields">
@@ -75,21 +75,23 @@
                                                 </select>
                                             </div>
                                             <div class="input-field">
-                                                <label>Age</label>
-                                                <input type="number" placeholder="Enter Age" class="form-control"
-                                                    name="age" value="" required>
-                                                @if($errors->has('age'))
-                                                <span class="text-danger">{{ $errors->first('age') }}</span>
-                                                @endif
-                                            </div>
-                                            <div class="input-field">
                                                 <label>Birth Date</label>
                                                 <input type="date" placeholder="Enter Birth Date" class="form-control"
-                                                    name="birth_date" value="" required>
+                                                    name="birth_date" id="birth_date" value="" required>
                                                 @if($errors->has('birth_date'))
                                                 <span class="text-danger">{{ $errors->first('birth_date') }}</span>
                                                 @endif
                                             </div>
+                                            <div class="input-field">
+                                                <label>Age</label>
+                                                <input  class="hide" type="number" placeholder="Enter Age" class="form-control"
+                                                    name="age" id="age" value="" required>
+                                                @if($errors->has('age'))
+                                                <span class="text-danger">{{ $errors->first('age') }}</span>
+                                                @endif
+                                            </div>
+
+                                           
                                             <div class="input-field">
                                                 <label>Phone Number</label>
                                                 <input type="number" class="form-control" name="phonenumber"
@@ -104,9 +106,9 @@
                                     </div>
                                     <div class="col-sm-12 col-xl-12">
                                         <div class="fields">
-                                        <div class="hidden input-field">
+                                            <div class="hidden input-field">
                                                 <label>Role</label>
-                                                <input  class="form-control" name="user_type" value="2" required>
+                                                <input class="form-control" name="user_type" value="2" required>
                                                 @if($errors->has('user_type'))
                                                 <span class="text-danger">{{ $errors->first('user_type') }}</span>
                                                 @endif
@@ -122,7 +124,7 @@
                                                     <option value="Department 5">Department 5</option>
                                                     <option value="Department 6">Department 6</option>
                                                     <option value="Department 7">Department 7</option>
-                                                    
+
                                                 </select>
                                                 @if($errors->has('department'))
                                                 <span class="text-danger">{{ $errors->first('department') }}</span>
@@ -142,7 +144,7 @@
                                                     <option value="Position 8">Position 8</option>
                                                     <option value="Position 9">Position 9</option>
                                                     <option value="Position 10">Position 10</option>
-                                                    
+
 
                                                 </select>
                                                 @if($errors->has('position'))
@@ -159,22 +161,21 @@
                                             </div>
                                             <div class="hidden input-field">
                                                 <label>Password</label>
-                                                <input type="password" value="12345" placeholder="Enter Password" class="form-control"
-                                                    name="password" value="" required>
+                                                <input type="password" value="12345" placeholder="Enter Password"
+                                                    class="form-control" name="password" value="" required>
                                                 @if($errors->has('password'))
                                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                                                 @endif
                                             </div>
                                             <div class="input-field">
                                                 <label>End of Contract</label>
-                                                <input type="date"  class="form-control"
-                                                    name="end_of_contract"  required>
+                                                <input type="date" class="form-control" name="end_of_contract" required>
                                                 @if($errors->has('birth_date'))
                                                 <span class="text-danger">{{ $errors->first('birth_date') }}</span>
                                                 @endif
                                             </div>
-                                            
-                                            
+
+
                                             <div class="input-field">
                                                 <label>Daily Rate</label>
                                                 <input type="numeric" class="form-control" name="daily_rate"

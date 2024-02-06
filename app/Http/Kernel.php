@@ -3,6 +3,9 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Models\User;
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends HttpKernel
 {
@@ -69,4 +72,10 @@ class Kernel extends HttpKernel
         'employee' => \App\Http\Middleware\EmployeeMiddleware::class,
         
     ];
+    protected function schedule(Schedule $schedule)
+{
+    $schedule->call(function () {
+        User::query()->update(['age' => DB::raw('TIMESTAMPDIFF(YEAR, birth_date, NOW())')]);
+    })->daily();
+}
 }

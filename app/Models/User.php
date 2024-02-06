@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+Use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -78,6 +79,15 @@ public static function getArchiveEmployee()
 static public function getID($id)
     {
         return self::find($id);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($user) {
+            $user->age = Carbon::parse($user->birth_date)->age;
+        });
     }
 }
 

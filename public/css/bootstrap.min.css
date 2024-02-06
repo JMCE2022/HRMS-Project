@@ -6015,7 +6015,9 @@ fieldset:disabled .btn {
 
 .modal-dialog-centered {
     display: flex;
+    
     align-items: center;
+    min-width: calc(100% - 1rem);
     min-height: calc(100% - 1rem)
 }
 
@@ -6023,13 +6025,15 @@ fieldset:disabled .btn {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 100%;
+  
     pointer-events: auto;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0);
     border-radius: .3rem;
     outline: 0
+
+    
 }
 
 .modal-backdrop {

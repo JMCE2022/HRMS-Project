@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->date('scheduled_date')->nullable();
+            $table->date('scheduled_end')->nullable();
             $table->text('description');
             $table->timestamps();
         });

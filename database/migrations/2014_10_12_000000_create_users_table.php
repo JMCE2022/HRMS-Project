@@ -104,7 +104,7 @@ return new class extends Migration
             ],
             // Add other users as needed
         ]);
-        
+        DB::statement('UPDATE users SET age = TIMESTAMPDIFF(YEAR, birth_date, NOW())');
     }
 
     /**

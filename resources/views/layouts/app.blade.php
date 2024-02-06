@@ -140,4 +140,28 @@
         });
     });
 </script>
+
+<script>
+    function setMinEndTime() {
+        var startDateInput = document.getElementById("scheduled_date");
+        var endDateInput = document.getElementById("scheduled_end");
+
+        if (startDateInput.value) {
+            endDateInput.min = startDateInput.value;
+        }
+    }
+</script>
+<script>
+    document.getElementById('birth_date').addEventListener('change', function() {
+        var birthDate = new Date(this.value);
+        var today = new Date();
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        document.getElementById('age').value = age;
+    });
+</script>
+
 </html>
