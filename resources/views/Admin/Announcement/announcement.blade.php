@@ -60,6 +60,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+
                                     {{$getAnn->onEachSide(1)->links()}}
 
                                 </div>

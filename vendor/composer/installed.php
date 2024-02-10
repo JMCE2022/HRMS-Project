@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'c8183a62144bad216a63f6def862ce99191d4bd9',
+        'reference' => '45105d3322e553aefa151fc913396b02bf5b85a1',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -382,7 +382,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'c8183a62144bad216a63f6def862ce99191d4bd9',
+            'reference' => '45105d3322e553aefa151fc913396b02bf5b85a1',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -441,6 +441,15 @@
             'install_path' => __DIR__ . '/../laravel/tinker',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'laravel/ui' => array(
+            'pretty_version' => 'v4.4.0',
+            'version' => '4.4.0.0',
+            'reference' => '7335d7049b2cde345c029e9d2de839b80af62bc0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/ui',
+            'aliases' => array(),
+            'dev_requirement' => true,
         ),
         'league/commonmark' => array(
             'pretty_version' => '2.4.1',
